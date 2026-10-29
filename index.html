@@ -50,10 +50,11 @@ h1 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: .01em; }
 
 .row { display: flex; flex-wrap: wrap; gap: 6px; }
 .row::-webkit-scrollbar { display: none; }
-.seg { display: inline-flex; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 2px; flex-shrink: 0; }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 2px; }
+@media (min-width: 600px) { .seg { grid-template-columns: repeat(6, auto); width: auto; } }
 .seg button { border: 0; background: none; padding: 5px 12px; border-radius: 7px; font-size: 14px; white-space: nowrap; cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); font-weight: 500; }
-.chip { flex-shrink: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 11px; font-size: 13px; white-space: nowrap; cursor: pointer; font-variant-numeric: tabular-nums; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 11px; font-size: 13px; white-space: nowrap; cursor: pointer; font-variant-numeric: tabular-nums; }
 .chip small { color: var(--muted); margin-left: 3px; }
 .chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 500; }
 .chip[aria-pressed="true"] small { color: var(--accent); }
