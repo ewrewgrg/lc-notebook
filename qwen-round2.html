@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>千问二面复习本</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: single reading column, sticky section index on wide screens; each section a <details> so it folds on a phone */
+:root{
+  --bg:#f6f7f4; --panel:#ffffff; --fg:#1d2420; --muted:#5d6a63; --line:#d9dfda;
+  --accent:#0f6b52; --accent-soft:#e2f0ea; --warn:#a1461f; --warn-soft:#f8e7dd; --code:#eef1ee;
+  --display:"Noto Serif SC","Songti SC",serif; --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111613; --panel:#18201c; --fg:#e4ebe6; --muted:#9aaba2; --line:#2c3832;
+  --accent:#5cc9a3; --accent-soft:#1d3a30; --warn:#f0a07a; --warn-soft:#3b2519; --code:#1f2924; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111613; --panel:#18201c; --fg:#e4ebe6; --muted:#9aaba2; --line:#2c3832;
+  --accent:#5cc9a3; --accent-soft:#1d3a30; --warn:#f0a07a; --warn-soft:#3b2519; --code:#1f2924; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.75}
+.wrap{max-width:1120px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;font-size:13.5px}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:5px 0 5px 10px;border-left:2px solid var(--line)}
+nav a:hover,nav a:focus-visible{color:var(--accent);border-left-color:var(--accent);outline:none}
+main{min-width:0;display:flex;flex-direction:column;gap:18px}
+header h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.5vw,40px);line-height:1.25;margin:0 0 8px;text-wrap:balance}
+header p{margin:0;color:var(--muted);max-width:68ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:500}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px}
+summary{cursor:pointer;list-style:none;padding:16px 18px;display:flex;align-items:baseline;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary h2{font-family:var(--display);font-weight:600;font-size:20px;margin:0;line-height:1.4}
+summary .tag{font-size:12px;color:var(--muted);letter-spacing:.06em;white-space:nowrap}
+summary::after{content:"＋";margin-left:auto;color:var(--muted)}
+details[open] summary::after{content:"－"}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+.body{padding:0 18px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+h3{font-size:16px;margin:10px 0 0;color:var(--accent);font-weight:700}
+h4{font-size:15px;margin:6px 0 0;font-weight:700}
+p,ul,ol{margin:0;max-width:72ch}
+ul,ol{padding-left:1.3em}
+li+li{margin-top:3px}
+.why{font-size:13.5px;color:var(--muted)}
+.why b{color:var(--fg);font-weight:500}
+.callout{border-left:3px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:0 8px 8px 0;max-width:72ch}
+.say{border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;max-width:72ch}
+code,.f{font-family:var(--mono);font-size:.88em;background:var(--code);padding:1px 5px;border-radius:4px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:680px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--code);font-weight:700;white-space:nowrap}
+td:first-child{font-variant-numeric:tabular-nums;color:var(--muted)}
+tr:last-child td{border-bottom:none}
+.prio{display:grid;gap:8px}
+.prio div{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:8px;align-items:baseline}
+.prio b.n{font-family:var(--mono);color:var(--accent)}
+.src{font-size:12.5px;color:var(--muted)}
+@media (max-width:860px){.wrap{grid-template-columns:minmax(0,1fr)}nav{display:none}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+<nav aria-label="目录">
+  <a href="#info">岗位与面试官课题</a>
+  <a href="#prio">二面优先级</a>
+  <a href="#sys">系统设计</a>
+  <a href="#vlm">VLM 结构</a>
+  <a href="#data">数据与评测</a>
+  <a href="#agent">Agent 与工具</a>
+  <a href="#rag">RAG 与幻觉</a>
+  <a href="#post">后训练</a>
+  <a href="#topics">三个研究课题</a>
+  <a href="#proj">项目防守</a>
+  <a href="#review">一面逐题复盘</a>
+  <a href="#mj">面经高频题</a>
+  <a href="#code">手撕与智力题</a>
+</nav>
+
+<main>
+<header>
+  <h1>千问二面复习本</h1>
+  <p>千问 APP 拍照问答（千问相机）多模态搜索与问答团队。由一面录音复盘和约 45 篇相关面经整理而成，按二面最可能考的顺序排列。</p>
+  <div class="meta">
+    <span class="chip">二面：11/9（请确认是周日还是周一）</span>
+    <span class="chip">一面 10/29 · 约 6/10 · 已通过</span>
+    <span class="chip warn">面试官评价：学历顶尖，项目偏弱</span>
+  </div>
+</header>
+
+<details id="info" open><summary><h2>岗位与面试官课题</h2><span class="tag">先读</span></summary><div class="body">
+<h3>岗位</h3>
+<ul>
+<li>阿里智能信息事业群，多模态算法实习生（多模态搜索与问答），服务千问 APP、夸克 APP、AI 眼镜。</li>
+<li>面试官所在组做 <b>千问 APP 的拍照问答</b>（拍图去搜索、回答）。夸克眼镜是另一个小组，一面时猜错过。</li>
+<li>系统是 ReAct 框架：模型自己调工具、看返回结果，再决定下一步（面试官当面确认）。</li>
+<li>JD 四条：多模态 PlanCoT（理解图文 query、规划工具调用）；VLM 后训练（行业知识、多轮对话、检索引用、偏好对齐）；多模态数据生产（图文对齐、图表理解）；用 RL 做多模态规划和视觉推理。</li>
+</ul>
+<h3>面试官提的三个研究课题（二面大概率围绕它们）</h3>
+<ol>
+<li><b>Agentic RL 从 SFT 到 RL 的冷启动</b>：SFT 训到什么时候就够了？纯文本可以看熵，带工具调用后熵不好用，需要别的指标。</li>
+<li><b>在线蒸馏（OPD）里老师本身的问题。</b></li>
+<li><b>GRPO 在 Agent 训练里的信用分配。</b></li>
+</ol>
+<p class="why">实习生偏研究方向，不太接触业务。面试官另外说过“算法背后的东西还得再看一看”。</p>
+</div></details>
+
+<details id="prio" open><summary><h2>二面优先级</h2><span class="tag">按顺序准备</span></summary><div class="body prio">
+<div><b class="n">1</b><span>系统设计：拍照识物、拍照解题，各准备一个 2 分钟版本。一面在这里卡壳最久。</span></div>
+<div><b class="n">2</b><span>VLM 结构：Qwen-VL 演进表，能现场算图片 token 数。Qwen3.5 的结构一定先核对官方资料。</span></div>
+<div><b class="n">3</b><span>三个研究课题：冷启动指标、OPD 老师的问题、信用分配。主动带出冷启动指标的想法。</span></div>
+<div><b class="n">4</b><span>后训练公式和细节：DPO / SimPO / GRPO / DAPO / GSPO / OPD，以及 forward 与 reverse KL。一面在第二层追问上丢分。</span></div>
+<div><b class="n">5</b><span>项目防守：按“业务问题 → 指标 → 基线 → 方法 → 结果 → 取舍”讲，被质疑时先给证据。</span></div>
+<div><b class="n">6</b><span>数据与评测、幻觉、多模态 RAG。</span></div>
+<div><b class="n">7</b><span>手撕：MHA（带 mask）、RoPE、DPO / GRPO 的 loss；智力题保持手感。</span></div>
+</div></details>
+
+<details id="sys"><summary><h2>系统设计</h2><span class="tag">一面丢分最多</span></summary><div class="body">
+<h3>拍一张商品照片问“这是啥”，系统怎么设计</h3>
+<p class="why"><b>为什么会问：</b>一面原题。面试官提示“不光是一个多模态模型能解决的”，当时把 OCR 的作用说反了，而且卡了很久。</p>
+<ol>
+<li><b>意图理解与路由：</b>用户想识别、比价、问用法，还是鉴别真假？图片是商品、文字、题目还是动植物？</li>
+<li><b>视觉预处理：</b>用 grounding 或检测把主体框出来并裁剪，去掉背景（否则以图搜图的向量会被背景污染）。用 OCR 读出品牌和型号，这是最强的线索。</li>
+<li><b>工具循环：</b>以图搜图（SigLIP / CLIP 双塔向量 + ANN 检索）得到候选；OCR 文本加候选标题做文本搜索；置信度低就改写 query 重搜，或者追问用户。</li>
+<li><b>重排验证：</b>VLM 把候选和原图逐一比对 logo、外观、文字，防止“同款不同型号”。</li>
+<li><b>带证据生成：</b>每个结论都要对应某个工具的返回，不确定时给“可能是 A 或 B”。</li>
+</ol>
+<p><b>训练：</b>先用 SFT 冷启动，再做 Agentic RL，奖励 = 答对 − 调用成本。<b>评测：</b>准确率、调用次数、延迟、幻觉率。</p>
+<div class="say">场景题通用答法：先定指标和约束（延迟、准确率、成本），再讲两阶段方案：先用现成工具搭 Agent 上线、积累数据，再训专用模型；最后讲 bad case 怎么回流。</div>
+
+<h3>拍照解题的系统设计</h3>
+<ol>
+<li>版面分析、题目切分，OCR 加公式识别（转 LaTeX）。几何图、函数图要保留视觉输入，不能只转文字。</li>
+<li>先搜题库（以图搜题或文本检索），命中就基于标准解析改写讲解，又快又准。</li>
+<li>没命中就让 VLM 逐步推理，数值计算交给计算器或代码执行，最后把答案代回验算。</li>
+<li>输出分步解析。评测看最终答案正确率加步骤正确率。</li>
+<li>难点：手写和拍照模糊、几何的视觉推理、答案对但过程错。</li>
+</ol>
+
+<h3>为什么不直接让 VLM 回答，一定要搜索</h3>
+<ul>
+<li>商品和实体是长尾知识，而且更新快，参数里的知识覆盖不了新品和小众品牌，模型会编型号。</li>
+<li>搜索结果可以溯源、可以引用，对应 JD 里的“检索引用”。</li>
+<li>代价是延迟和成本，所以按需搜索：简单、明确的问题一轮就答，复杂的才进多轮循环。</li>
+</ul>
+</div></details>
+
+<details id="vlm"><summary><h2>VLM 结构</h2><span class="tag">一面只答到“CLIP + 投影层”</span></summary><div class="body">
+<h3>通用结构：视觉编码器 + 连接器 + LLM</h3>
+<ul>
+<li><b>视觉编码器：</b>ViT（CLIP 或 SigLIP 预训练），把图切成 patch，得到视觉 token。</li>
+<li><b>连接器：</b>线性层或 MLP（LLaVA，不压缩 token 数）；Q-Former / Perceiver Resampler（BLIP-2、Flamingo，用可学习 query 压成固定数量）；cross-attention 注入（Flamingo）；token 合并（Qwen2-VL 把相邻 2×2 个 token 合成 1 个，InternVL 的 pixel shuffle）。</li>
+<li><b>LLM：</b>视觉 token 和文本 token 拼接后自回归。</li>
+<li><b>训练阶段：</b>先只训连接器做对齐，再图文预训练，再指令 SFT，最后偏好对齐或 RL。</li>
+</ul>
+<h3>Qwen-VL 系列演进</h3>
+<div class="tbl"><table>
+<tr><th>版本</th><th>要点</th></tr>
+<tr><td>Qwen-VL</td><td>ViT + 单层 cross-attention 适配器，把图压成 256 个 token，固定 448 分辨率；grounding 用 <code>&lt;box&gt;</code> 加归一化到 [0,1000) 的坐标文本</td></tr>
+<tr><td>Qwen2-VL</td><td>原生动态分辨率（ViT 用 2D-RoPE 支持任意分辨率，token 数随图大小变化，再用 MLP 做 2×2 合并）；M-RoPE 把位置编码拆成时间、高、宽三个分量，文本的三个分量取同一个值、等价于 1D RoPE；图像和视频统一处理</td></tr>
+<tr><td>Qwen2.5-VL</td><td>ViT 大部分层改成窗口注意力，降低高分辨率开销；视频动态帧率，M-RoPE 的时间维对齐到绝对时间；grounding 改用原图绝对像素坐标；加强文档解析和电脑、手机操作 Agent</td></tr>
+<tr><td>Qwen3-VL</td><td>DeepStack：把 ViT 多层特征注入 LLM 前几层；交错 M-RoPE（时间、高、宽在频率维上交错分配，避免某个轴只拿到低频）；视频用文本时间戳对齐；原生长上下文；有 Dense 和 MoE、Instruct 和 Thinking 版本</td></tr>
+<tr><td>Qwen3.5</td><td>官方定位是原生多模态。记忆中是线性注意力（Gated DeltaNet）与门控注意力混合，加稀疏 MoE。<b>这一条把握不大，面试前必须核对官方博客</b>。你自己的项目就用 Qwen3.5-4B，被问到说不清会很减分</td></tr>
+</table></div>
+<div class="callout">不确定的细节就说“我记得是……具体还要再核实”，不要硬答。这个弱点以前出现过。</div>
+<h3>现场算图片 token 数（蚂蚁、腾讯现场考过）</h3>
+<p>patch 为 14、再做 2×2 合并时，token 数约等于 <span class="f">(H/28) × (W/28)</span>。例如 448×448 → 16×16 = 256 个；1024×1024 → 约 37×37 ≈ 1,369 个。实际会先把边长调整到 28 的倍数，并受 min_pixels / max_pixels 约束。</p>
+<h3>训练和测试分辨率不一致会怎样</h3>
+<ul>
+<li>固定分辨率的 ViT：位置编码要插值或外推，偏离训练分布就掉点。</li>
+<li>动态分辨率模型：分辨率太低，小字和细节丢失，OCR 类任务掉得最多；太高则 token 暴涨，延迟和显存上升，还可能超出训练时见过的长度。</li>
+<li>实践中会限制 min_pixels / max_pixels，训练时混合多种分辨率。</li>
+</ul>
+<h3>CLIP、SigLIP 与 InfoNCE（以图搜图的底座）</h3>
+<ul>
+<li>双塔结构，batch 内 N 对图文，对 N×N 相似度矩阵做对称交叉熵：<span class="f">L = −log( exp(s_ii/τ) / Σ_j exp(s_ij/τ) )</span>。</li>
+<li>SigLIP 把 softmax 换成逐对的 sigmoid 二分类，不需要全 batch 归一化，对大 batch 更友好。</li>
+<li>商品检索：同款不同角度当正样本，同品牌的相似款当难负样本。温度 τ 控制分布的尖锐程度。</li>
+</ul>
+<h3>grounding</h3>
+<p>把坐标当文本 token 预测；Qwen-VL 用 [0,1000) 归一化坐标，Qwen2.5-VL 用绝对像素坐标（Qwen3-VL 用哪种，面试前核对）。在 Agent 里用来先框出主体再裁剪，或者做放大工具。</p>
+</div></details>
+
+<details id="data"><summary><h2>数据与评测</h2><span class="tag">千问多模态岗爱问</span></summary><div class="body">
+<h3>评测基准</h3>
+<ul>
+<li>通用：VQAv2、MMBench、MMMU。OCR 与文档：TextVQA、DocVQA、ChartQA、InfoVQA。</li>
+<li>必须检索的知识型：OK-VQA、A-OKVQA、InfoSeek、Encyclopedic-VQA。多模态搜索：MMSearch。</li>
+<li>数学与拍题：MathVista、MathVerse、MathVision。</li>
+<li>评测方式：短答案用规则匹配；开放答案用 LLM 加评分细则判；搜索类再看调用次数、延迟、引用是否正确。</li>
+</ul>
+<h3>多模态训练数据怎么造（面经原题：一条样本长什么样、图文一致性怎么过滤）</h3>
+<ul>
+<li>来源：线上真实 query 回流（脱敏 + 标注）、强模型合成 caption 和 QA、渲染合成的图表和文档、题库图片配解析。</li>
+<li>流程：采集 → 规则过滤 → 模型打分（CLIP 相似度、VLM 判官）→ 去重（感知哈希或向量聚类）→ 难度分层 → 配比消融。</li>
+<li>Agent 轨迹：用强模型在真实工具环境里跑，只保留答案正确、调用合理的轨迹（拒绝采样）。</li>
+<li>面经追问：有了 caption 为什么还要造 VQA 和推理数据？因为 caption 只教“描述”，问答和推理数据教的是“根据问题定位证据、多步推理”，对应下游任务的格式和能力。</li>
+<li>有没有必要造极短回答的数据（比如只答物种名）？有：拍照识物的核心是给出准确实体名，短答案让 loss 集中在关键 token 上，也训练模型不啰嗦。</li>
+</ul>
+<h3>涨了 1 个点，是真提升还是噪声</h3>
+<p>多个随机种子、每个任务多次采样、配对 bootstrap 置信区间，报 pass@1 和 pass^k。还要用纯文本基线（把图遮掉）排除“不看图也能答对”的题。<b>这是你的强项，可以主动讲自己项目里怎么做的。</b></p>
+</div></details>
+
+<details id="agent"><summary><h2>Agent 与工具调用</h2></summary><div class="body">
+<ul>
+<li><b>常用工具：</b>以图搜图、文本网页搜索、OCR、裁剪和放大、代码执行、计算器、商品库或题库查询。</li>
+<li><b>代表工作（细节面试前核对）：</b>MMSearch-R1（用 RL 学何时搜图、何时搜文本，惩罚不必要的搜索）；DeepEyes 等“边看边想”的工作（把放大当工具）；通义 WebWatcher（视觉语言深度研究 Agent）。</li>
+<li><b>关键设计：</b>工具返回统一成观察；上下文管理（图片 token 很占地方，可以摘要或丢掉旧图）；SFT 时工具返回部分不计 loss。</li>
+<li><b>为什么用 Agent 而不是固定流程：</b>决策空间是开放的，需要根据观察反馈决定下一步；固定流程覆盖不了长尾（你的项目里：规则流水线长尾 36%，LLM 84.5%）。</li>
+<li><b>场景题：线上 Agent 老在调工具不回答，怎么定位：</b>看奖励里工具奖励是否过高、停止条件、工具返回是否太长挤占上下文、SFT 数据里调工具的轨迹占比是否偏高；按“规划 / 工具选择 / 参数 / 执行 / 总结”分层埋点归因。</li>
+<li><b>视觉工具坐标幻觉怎么兜底：</b>坐标归一化、越界裁剪、校验后重试。</li>
+</ul>
+</div></details>
+
+<details id="rag"><summary><h2>RAG 与幻觉</h2></summary><div class="body">
+<h3>从概率角度解释 RAG 为什么能降幻觉（面经原题）</h3>
+<p>没有检索时，生成靠参数知识 p(y|x)，长尾事实在训练分布里概率质量低，模型会按语言先验补出流畅但错误的答案。检索后变成 p(y|x, d)，相关文档大幅抬高正确答案的条件概率，熵下降，模型从“回忆”变成“抄写和归纳”。前提是检索要准，所以需要重排、多路召回、引用约束，以及“证据不足就拒答”。</p>
+<h3>多模态 RAG 两条路线</h3>
+<ul>
+<li>图片直接做向量，以图搜图或跨模态检索：保留视觉细节，但对背景和角度敏感。</li>
+<li>先转文本（OCR 或 caption）再按文本检索：能复用成熟的文本搜索，但转写会丢信息。</li>
+<li>工业上两路并行再融合（如 RRF），用 VLM 精排；生成时每个论断标注来源编号，引用正确率可以作为奖励或偏好信号。</li>
+</ul>
+<h3>多模态幻觉</h3>
+<ul>
+<li><b>成因：</b>语言先验压过视觉证据；长生成中对视觉 token 的注意力衰减；分辨率不足；训练 caption 本身有幻觉。</li>
+<li><b>评测：</b>POPE（物体是否存在的问答）、CHAIR（caption 物体幻觉率）；Agent 场景看“没有工具证据支撑的论断占比”。</li>
+<li><b>缓解：</b>解码侧 VCD、OPERA；训练侧幻觉偏好对（RLHF-V、RLAIF-V）、多模态 DPO 加“同一回答配破坏过的图”负例；系统侧检索 + 引用、放大复看、低置信时给多个候选或追问。</li>
+<li><b>怎么验证模型不看图也能答：</b>把图遮掉，看纯文本能答对多少，再看视觉 token 的注意力占比。</li>
+</ul>
+</div></details>
+
+<details id="post"><summary><h2>后训练</h2><span class="tag">一面追问到第二层</span></summary><div class="body">
+<h3>DPO 与 SimPO</h3>
+<ul>
+<li>DPO：<span class="f">L = −log σ(β[log π(y_w)/π_ref(y_w) − log π(y_l)/π_ref(y_l)])</span>。没有显式 KL，约束隐含在 β·log(π/π_ref) 里，β 就是 KL 系数。π 是<b>整条回复的序列 log 概率</b>，不是最后一层 logits。</li>
+<li>SimPO：<span class="f">L = −log σ(β/|y_w|·log π(y_w) − β/|y_l|·log π(y_l) − γ)</span>。没有参考模型、没有 KL。β 是奖励缩放，γ 是目标间隔（要求好回答至少高出 γ），不是防偏离。</li>
+<li>SimPO 的核心动机：让训练奖励和生成时的平均似然一致；去掉参考模型只是附带好处。长度归一化是为了<b>消除长度偏差</b>，不是约束回复长度（这句错过两次）。</li>
+<li>DPO 的缺陷：离线、分布偏移；chosen 的概率也会被一起压低；对长度偏好过拟合；只有相对信号。</li>
+<li>KL 放在哪：PPO-RLHF 放在奖励里（每个 token 扣 β·log(π/π_ref)）；GRPO 直接放在 loss 里，用 k3 估计。</li>
+</ul>
+<div class="callout">不要再说“DPO 显存爆了所以用 SimPO”：LoRA 下参考模型就是关掉 adapter 的基座，不额外占显存，只是多一次前向。</div>
+<h3>GRPO</h3>
+<ul>
+<li>优势 <span class="f">A_i = (r_i − mean) / std</span>（是标准差）；目标里是<b>重要性比率 × 优势</b>，加 clip，减去 β·KL（k3），按 1/G 和 1/|o| 归一化。</li>
+<li><b>方差小不是问题</b>，除以标准差会放大；<b>方差为 0 才是问题</b>：全对或全错时优势为 0，没有梯度，还稀释 batch。除以 std 还会带来难度偏差，所以 Dr.GRPO 去掉了它。</li>
+<li><b>训推串行时还需要重要性采样吗：</b>需要。一批数据分多个 mini-batch 更新，从第二步起就是 off-policy；而且推理用 vLLM、训练用 FSDP，同一份权重算出的 log 概率也对不上，要用 TIS / MIS 修正（得分点）。</li>
+<li><b>DAPO 四招：</b>动态采样（过滤全对全错的组）、clip-higher（防熵塌缩）、token 级 loss 聚合、超长样本软惩罚。</li>
+<li><b>序列级优势的问题：</b>没有信用分配；长度偏差。DAPO 在所有 token 上统一平均，Dr.GRPO 去掉 1/|o|，GSPO 把重要性比率改到序列级，MoE 上更稳。</li>
+<li><b>熵塌缩：</b>熵快速下降、pass@k 不涨。原因是高概率且优势为正的 token 被不断加强、clip 让低概率 token 难以被调高（Cui 等人：log 概率与优势的协方差为正）。缓解：clip-higher、动态采样、提高温度、谨慎加熵正则、Clip-Cov / KL-Cov。</li>
+<li><b>PPO 和 GRPO：</b>PPO 有 critic，用 GAE 算 token 级优势；GRPO 用组内归一化代替 critic，省显存，但只有序列级信号。</li>
+</ul>
+<h3>OPD、GKD、forward 与 reverse KL（一面连续三个“不了解”）</h3>
+<ul>
+<li><b>OPD：</b>学生自己生成，老师在学生的序列上逐 token 打分，最小化 reverse KL(π_学生‖π_老师)。比 SFT 蒸馏少了曝光偏差，比 RL 信号稠密。</li>
+<li><b>按老师给的信息量：</b>完整词表概率（最全、最贵）/ top-k 概率再归一化 / 只给采样 token 的 log 概率（最便宜，可直接当奖励，方差最大）。</li>
+<li><b>按数据来源：</b>在线、离线、混合（GKD 用比例 λ 混合）。变体：OPSD（同一模型看到额外信息时当老师）、多老师 OPD。</li>
+<li><b>GKD 式与策略梯度式：</b>GKD 式直接对散度求梯度（广义 JSD，在 forward 与 reverse KL 之间插值）；策略梯度式把 log π_老师 − log π_学生 当作 token 级奖励，可以和任务奖励相加（Thinking Machines 的做法）。</li>
+<li><b>forward KL：</b>覆盖均值，学生要覆盖老师所有有概率的地方，期望在老师分布下取，SFT 交叉熵就是它。<b>reverse KL：</b>锁定峰值，学生挑一个峰拟合，期望在学生分布下取，天然在线。</li>
+<li>你项目里没做 OPD 的理由（一面说过，是好理由）：GLM 的 API 拿不到学生序列上的逐 token 概率；GLM 和 Qwen 词表不同，需要跨分词器对齐。</li>
+</ul>
+</div></details>
+
+<details id="topics"><summary><h2>三个研究课题</h2><span class="tag">主动带出</span></summary><div class="body">
+<h3>课题 1：SFT 训到什么时候就够了</h3>
+<ul>
+<li><b>AceReason-Nemotron 1.1（NVIDIA）：</b>SFT 越强，RL 后最终越好；RL 会缩小差距但不改变排名，前提是采样温度把熵维持在约 0.3。</li>
+<li><b>SFT Overtraining Predicts Rank Inversion（ICML 2026）：</b>SFT 训过头会让 RL 后排名反转，原因是熵已经塌了；RL 前测一次平均 token 熵比看 pass@k 更能预测 RL 效果。</li>
+<li><b>WiSE-FT / AESL：</b>SFT 中 pass@1 一直涨，pass@k 很快下降；多样性开始下降时就该停。</li>
+<li><b>Yue 等（NeurIPS 2025 oral）：</b>RL 主要提升 pass@1，k 很大时基座的 pass@k 会追上；pass@k 与 pass@1 的差距就是 RL 能挖的空间。</li>
+<li><b>ARPO（ICLR 2026）：</b>每次工具返回后，接下来几个 token 的熵会明显升高。</li>
+</ul>
+<div class="say">为什么带工具后熵不好用：整体 token 熵被两类 token 扭曲，工具调用的 JSON 格式 token 熵天然很低（把平均值拉低），工具返回后的 token 熵又很高（ARPO 的发现）。所以要换成<b>只在决策点上算的指标</b>：工具调用合法率是否饱和；pass@k 与 pass@1 的差距；组内有区分度的样本占比；关键决策点（搜不搜、调哪个工具、填什么参数）的熵；对每个决策点采样多个候选，看有多少比例会出现不同动作（“有效负例率”）。可以设计实验：不同 SFT checkpoint 接同样预算的后续训练，看哪个指标最能预测最终收益。</div>
+<p class="why">你正在跑的重构项目里就做了这个实验（不同 SFT checkpoint 上算这些指标，再接同样预算的 Agentic-DPO）。结果出来之前，只讲设计，不讲结论。</p>
+<h3>课题 2：OPD 里老师的问题</h3>
+<ul>
+<li>学生生成的前缀可能是老师自己永远不会走到的状态，老师在这些状态上的打分不可靠。</li>
+<li>能力差距太大，学生学不动，可以用中等大小的老师过渡。</li>
+<li>词表不一致需要对齐。</li>
+<li>reverse KL 会降低多样性，和后续 RL 的探索相冲突。</li>
+<li>你的项目：在学生自己走到的状态上让老师接管，并比较老师在“专家状态”和“学生状态”上的成功率；老师的标注必须通过环境校验才采用。</li>
+</ul>
+<h3>课题 3：Agent 训练中的信用分配</h3>
+<ul>
+<li>先讲自己的：环境校验器能定位第一次出错的步骤，只惩罚出错步；偏好对在偏离点构造，天然是步级信用。</li>
+<li>业界：GiGPO（同组轨迹中找环境状态相同的步骤，再分组算步级优势，A = A_轨迹 + ω·A_步）；过程奖励模型；树搜索采样（从中间分叉，用蒙特卡洛估每步价值）；按轮给奖励；PPO + GAE。</li>
+</ul>
+</div></details>
+
+<details id="proj"><summary><h2>项目防守</h2><span class="tag">被质疑时先给证据</span></summary><div class="body">
+<div class="callout">一面面试官的原话是“学历顶尖，项目偏弱”，当时你直接认了。被推一下就退，是最近几场挂掉的共同原因。</div>
+<ul>
+<li><b>讲法：</b>业务问题 → 指标 → 基线 → 方法 → 结果 → 失败与取舍。千问 C 端有挂经，面试官批评候选人“项目没有最初的业务目标”。</li>
+<li><b>“项目偏弱”怎么回应：</b>不否定、也不附和。本科信安方向，读研转 LLM/Agent，两个项目都从零搭起，环境、数据、训练、评测每个环节都能讲清，然后拿数字说话。</li>
+<li><b>“为什么用 LLM 不用规则”：</b>长尾集上规则流水线 36%，LLM 84.5%。</li>
+<li><b>和本组的连接：</b>环境校验器 = 可验证奖励；偏离点 = 步级信用分配；老师接管纠错 = DAgger，与冷启动和信用分配课题直接对应。</li>
+<li><b>第二个项目（多跳检索）被说“只有框架没训练”：</b>承认，再补一句它产出的轨迹和评测可以直接做 SFT 数据和奖励，然后把时间拉回项目一。</li>
+</ul>
+<div class="callout">不要说“学生超过老师”；不要说“数据是自己造的、没什么区别”。重构后的项目（τ²-bench 公开基准、清洗 APIGen-MT、Agentic-DPO）结果出来前，只讲设计和数据清洗的发现：3,411 条公开轨迹中 27% 编造参数、约 8% 涉及评测订单，清洗后保留 1,791 条。</div>
+</div></details>
+
+<details id="review"><summary><h2>一面逐题复盘</h2><span class="tag">32 题</span></summary><div class="body">
+<p class="why">一面时间分配：项目约 3 分钟，RL 八股约 15 分钟，VQA 约 5 分钟，算法题 6 分钟，智力题 20 分钟，反问 3 分钟。</p>
+<div class="tbl"><table>
+<tr><th>#</th><th>问题</th><th>当时的回答</th><th>问题在哪</th><th>改进</th></tr>
+<tr><td>1</td><td>第二个项目只做了框架、没训练？</td><td>“对的”</td><td>只认了</td><td>承认，补一句框架产出的轨迹和评测可做 SFT 数据和奖励，然后拉回项目一</td></tr>
+<tr><td>2</td><td>考虑过 GRPO / OPD 吗</td><td>讲了奖励设计和偏离点信用分配；没做的理由是资源不够、组内方差小</td><td>“方差小”不严谨</td><td>正常流程已 90% 多、组内全对没梯度；异常场景有区分度，正适合单独做 GRPO，校验器还能给步级奖励</td></tr>
+<tr><td>3</td><td>方差小是问题吗？不是会除以 std 吗</td><td>答成全 0 / 全 1</td><td>没接住</td><td>方差小会被放大，不是问题；方差为 0 才没梯度；除以 std 带来难度偏差（Dr.GRPO）</td></tr>
+<tr><td>4</td><td>面试官提示“就挑异常场景做”</td><td>“应该可以做”</td><td>台阶没接</td><td>“对，异常场景成功率只有五十多，组内有区分度，还能定位首次出错给步级奖励”</td></tr>
+<tr><td>5</td><td>为什么用 SimPO</td><td>“DPO 多一个 ref，显存爆了”</td><td>LoRA 下 ref 不占显存</td><td>省掉一次参考前向；长度归一化去掉长度偏差；奖励与生成指标一致</td></tr>
+<tr><td>6</td><td>本科为什么没找老师？项目薄弱</td><td>“履历确实薄弱”</td><td>自我否定</td><td>讲转方向的事实，再拿数字说话</td></tr>
+<tr><td>7</td><td>DPO 和 SimPO 核心区别</td><td>“SimPO 约束回复长度”“省显存”</td><td>“约束长度”是错的</td><td>写出两个公式；长度归一化是消除长度偏差</td></tr>
+<tr><td>8</td><td>SimPO 动机只是去掉 ref？</td><td>“去掉 ref”</td><td>没讲到核心</td><td>核心是奖励与生成时的平均似然一致</td></tr>
+<tr><td>9</td><td>margin 好调吗</td><td>“1.4 左右，防止偏离太多”</td><td>作用说错</td><td>γ 是目标间隔、拉开区分度；常用 β≈2–2.5，γ/β≈0.3–0.5，γ 太大会把 chosen 也压低</td></tr>
+<tr><td>10</td><td>DPO 最大缺陷</td><td>off-policy、不能探索，表达乱</td><td>乱</td><td>离线分布偏移、chosen 概率下降、长度过拟合、只有相对信号</td></tr>
+<tr><td>11</td><td>DPO / PPO 加 KL 吗</td><td>先说不加又改口</td><td>来回改口</td><td>DPO 隐含在 β·log(π/π_ref)；PPO 在奖励里；GRPO 在 loss 里用 k3</td></tr>
+<tr><td>12</td><td>SimPO 有 KL 吗</td><td>“减去 γ……也有 β”</td><td>把 γ 当 KL</td><td>没有，也没有 ref</td></tr>
+<tr><td>13</td><td>GRPO loss 的组件</td><td>“reward 乘优势……除以方差”，漏了 KL</td><td>口误</td><td>比率 × 优势、除以 std、clip、减 β·KL（k3）、1/G 与 1/|o| 归一化</td></tr>
+<tr><td>14</td><td>训推串行还要重要性采样吗</td><td>“可能不太需要”</td><td>漏了得分点</td><td>多个 mini-batch 时是 off-policy；vLLM 与 FSDP 的训推不一致需 TIS / MIS</td></tr>
+<tr><td>15</td><td>全 0 / 全 1 时怎么处理</td><td>只说 DAPO 动态采样</td><td>GRPO 本身没说</td><td>GRPO 没梯度但计入分母稀释 batch；DAPO 过滤后补采样，顺带讲另外三招</td></tr>
+<tr><td>16</td><td>序列级优势的问题</td><td>内容对、表达乱</td><td>乱</td><td>没有信用分配；长度偏差；DAPO / Dr.GRPO / GSPO 各自怎么改</td></tr>
+<tr><td>17</td><td>Agent 前对后错，细粒度信用分配？</td><td>“GiGPO 做过，具体不记得”</td><td>没回到自己项目</td><td>先讲首次出错定位，再讲 GiGPO、PRM、树搜索、按轮奖励、GAE</td></tr>
+<tr><td>18</td><td>了解 OPD 吗</td><td>思想对，讲了为什么没做</td><td>没用术语</td><td>补上 reverse KL、无曝光偏差、稠密信号</td></tr>
+<tr><td>19</td><td>OPD 有哪些形式</td><td>“不是很了解”</td><td>答不出</td><td>全词表 / top-k / 采样 token；在线 / 离线 / 混合</td></tr>
+<tr><td>20</td><td>GKD 式和策略梯度式</td><td>“没看过”</td><td>答不出</td><td>GKD 是监督式散度 loss；策略梯度式把老师当 token 级奖励</td></tr>
+<tr><td>21</td><td>forward 和 reverse KL</td><td>方向对，没术语</td><td>不专业</td><td>覆盖均值 vs 锁定峰值；期望分别在老师 / 学生分布下</td></tr>
+<tr><td>22</td><td>VQA 了解吗</td><td>“CLIP 加投影层”</td><td>太浅</td><td>结构 + Qwen 动态分辨率和 M-RoPE + 难点 + 评测基准</td></tr>
+<tr><td>23</td><td>知道我们组做什么吗</td><td>猜夸克眼镜</td><td>没调研</td><td>千问 APP 拍照问答（千问相机）</td></tr>
+<tr><td>24</td><td>拍商品问“这是啥”，系统怎么设计</td><td>“先用 OCR 把它转成图片”，停顿很长</td><td>OCR 说反、没有具体工具</td><td>见“系统设计”的五步</td></tr>
+<tr><td>25</td><td>接雨水</td><td>双指针</td><td>无</td><td>保持</td></tr>
+<tr><td>26</td><td>接雨水用单调栈</td><td>不知道几个栈</td><td>不会</td><td>一个栈存下标、高度单调递减，按层算水</td></tr>
+<tr><td>27</td><td>打家劫舍</td><td>dp = max(前一个, 前两个 + 当前)</td><td>多说“取全局最大”</td><td>两个变量滚动，答案就是最后一个状态</td></tr>
+<tr><td>28</td><td>变体：可相邻但不能连选三个</td><td>加一维</td><td>漏了“不选”状态</td><td>三状态：不选 / 连选 1 个 / 连选 2 个</td></tr>
+<tr><td>29</td><td>1000 瓶药最少几只鼠</td><td>先说 90 只，靠提示得 10</td><td>没想到一只鼠是一个比特</td><td>2^10 ≥ 1000，10 只；两小时版是三进制，7 只</td></tr>
+<tr><td>30</td><td>100 个囚犯黑白帽子</td><td>先答 50</td><td>没想到一人传全局信息</td><td>最后一人报黑帽数奇偶，救 99 人</td></tr>
+<tr><td>31</td><td>三种颜色的帽子</td><td>猜 60、67</td><td>没推导就报数</td><td>传所有人颜色编号之和 mod 3，仍救 99 人</td></tr>
+<tr><td>32</td><td>反问</td><td>问组里偏训练还是偏框架，拿到三个课题</td><td>好</td><td>二面主动带出冷启动指标的想法</td></tr>
+</table></div>
+</div></details>
+
+<details id="mj"><summary><h2>面经高频题</h2><span class="tag">约 45 篇</span></summary><div class="body">
+<p class="why">没有找到“千问拍照问答”的直接面经。最接近的是千问 C 端多模态、千问多模态搜索问答一面、通义多模态后训练、千问事业部 Agent 岗二面。</p>
+<h3>阿里二面的特点</h3>
+<ul>
+<li>以项目深挖为主，往开放问题延伸：前沿判断、模型结构改进的优劣；有面试官直接拉着候选人看论文草稿和原始数据。</li>
+<li>重业务：线上 bad case、成本延迟、评估指标、项目的业务目标。</li>
+<li>手撕偏少，但 MHA、RoPE、loss 还是要能写。</li>
+<li>有人在淘天二面最后展示了为岗位专门做的小 demo，随后通过。</li>
+</ul>
+<h3>千问相关面经里出现过的题</h3>
+<ul>
+<li>图文数据格式、一条训练样本长什么样、图文一致性怎么过滤；为什么选 Qwen3-VL；QLoRA 为什么省显存。</li>
+<li>有了 caption 为什么还要造 VQA / 推理数据；视频关键帧怎么选；读过哪些 VLM 技术报告（Qwen3-VL、GLM-4.1V、MiMo-VL、Kimi-VL、Seed-1.5-VL）。</li>
+<li>从概率角度解释 RAG 为什么能降幻觉；为什么用 DPO 不用 RLHF；偏好数据怎么造、怎么保证质量；为什么单独做校验器而不用 LLM 判官；熵塌缩是什么、怎么监控。</li>
+<li>主 Agent 和子 Agent 怎么分工；去掉 LLM 只留固定流程还能不能跑；为什么需要 RL；奖励组成和 reward hacking；线上 Agent 老调工具不回答怎么定位。</li>
+<li>有没有必要造极短回答的图文对；怎么让回复更“跳脱”（面试官想听 RL 角度，而不只是调解码参数）；手撕 PPO 伪代码。</li>
+<li>PPO / GRPO / OPD 的 loss；GRPO 的 KL 是 forward 还是 reverse；Qwen 架构；内在与外在幻觉。</li>
+<li>embedding 模型和重排模型的区别；GraphRAG 与 RAG；手撕带 mask 的 MHA、RoPE。</li>
+</ul>
+<h3>其他厂二面的现场推导题（可能被追问）</h3>
+<ul>
+<li>蚂蚁：现场算 448² 图的 M-RoPE 编码和各轴频率周期；1024² 图多少 token、DeepStack 做了什么；为什么选 DAPO；涨 1 个点怎么判断是真的。</li>
+<li>腾讯：Qwen3.5 和 Qwen3-VL 的区别、各自的 RoPE；256×256 图多少 token；RL 监控指标（熵、KL、奖励）。</li>
+<li>百度：手撕 OPD（要加 mask）；显存估算。</li>
+</ul>
+</div></details>
+
+<details id="code"><summary><h2>手撕与智力题</h2></summary><div class="body">
+<ul>
+<li>高频手撕：MHA / self-attention（带 mask，约 7 次）、RoPE、最长公共子序列、最长回文、岛屿数量、无重复字符最长子串、判断子序列、PPO / OPD 伪代码、MoE 路由。</li>
+<li>MHA：<span class="f">d_k = d_model / n_heads</span>（不是“层数比头数”）；除以 √d_k 防止点积方差随维度增大、softmax 饱和；因果 mask 在 softmax 前用下三角把未来位置置为 −inf。</li>
+<li>原则：没推出来不要报数，先说“我推一下”；写完先跑通再说“好了”。</li>
+<li>智力题：毒药 10 只（一只鼠一个比特）；黑白帽子救 99 人（奇偶）；三色帽子仍救 99 人（编号和 mod 3）；8 枚硬币找重的（三分称重）。</li>
+</ul>
+<p class="src">题解本：ewrewgrg.github.io/lc-notebook（手撕代码页已有 SFT / DPO / SimPO / GRPO / MHA / RoPE）</p>
+</div></details>
+
+<p class="src">来源：一面录音转写与当时的复盘（10/29），以及小红书、牛客、知乎上约 45 篇 2025-08 至 2026-11 的面经。标注“需核对”的细节，面试前请对照官方资料。</p>
+</main>
+</div>
+
+</body>
+</html>
