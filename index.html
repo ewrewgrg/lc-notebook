@@ -113,6 +113,12 @@ footer { color: var(--muted); font-size: 12px; text-align: center; }
 .check { color: var(--easy); }
 .nav2 { display: flex; justify-content: space-between; gap: 8px; margin-top: 14px; }
 @media (prefers-reduced-motion: no-preference) { .sheet { animation: up .18s ease-out; } @keyframes up { from { transform: translateY(14px); opacity: .6; } } }
+
+/* Method chips: one swipeable line by default so the sticky header stays short; "展开" shows all (capped height) */
+.mrow { display: flex; align-items: flex-start; gap: 6px; }
+#methods { flex: 1; min-width: 0; flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+#methods.open { flex-wrap: wrap; overflow-x: hidden; overflow-y: auto; max-height: 34vh; -webkit-mask-image: none; mask-image: none; }
+.mtoggle { flex: none; color: var(--accent); }
 </style>
 
 <header>
@@ -120,7 +126,7 @@ footer { color: var(--muted); font-size: 12px; text-align: center; }
     <div class="top"><h1>我的力扣题解本</h1><a class="navlink" href="qwen-round2.html">千问二面复习本 →</a><div class="stat" id="stat"></div></div>
     <div class="row"><div class="seg" id="lists" role="group" aria-label="题单"></div></div>
     <div class="row" id="diffs" role="group" aria-label="难度"></div>
-    <div class="row" id="methods" role="group" aria-label="方法"></div>
+    <div class="mrow"><div class="row" id="methods" role="group" aria-label="方法"></div><button class="chip mtoggle" id="mtoggle" aria-expanded="false">展开</button></div>
     <div class="search"><input id="q" type="search" placeholder="搜题号或题名" autocomplete="off"></div>
   </div>
 </header>
@@ -218,7 +224,10 @@ function syncHash() { const s = location.hash.slice(1); if (s && Q[s]) openQ(s);
 
 $("lists").onclick = e => { const b = e.target.closest("button"); if (!b) return; st.list = b.dataset.k; st.method = "ALL"; store.set("lc.list", st.list); renderControls(); renderList(); };
 $("diffs").onclick = e => { const b = e.target.closest("button"); if (!b) return; st.diff = b.dataset.k; renderControls(); renderList(); };
-$("methods").onclick = e => { const b = e.target.closest("button"); if (!b) return; st.method = b.dataset.k; renderControls(); renderList(); };
+$("methods").onclick = e => { const b = e.target.closest("button"); if (!b) return; st.method = b.dataset.k; setMethodsOpen(false); renderControls(); renderList(); showSelectedMethod(); };
+function setMethodsOpen(open) { $("methods").classList.toggle("open", open); $("mtoggle").setAttribute("aria-expanded", open); $("mtoggle").textContent = open ? "收起" : "展开"; }
+function showSelectedMethod() { const b = $("methods").querySelector('[aria-pressed="true"]'); if (b && !$("methods").classList.contains("open")) b.scrollIntoView({ block: "nearest", inline: "center" }); }
+$("mtoggle").onclick = () => { setMethodsOpen(!$("methods").classList.contains("open")); showSelectedMethod(); };
 $("q").oninput = e => { st.q = e.target.value; renderList(); };
 $("out").onclick = e => { const b = e.target.closest(".q"); if (b) location.hash = b.dataset.s; };
 $("back").onclick = () => { location.hash = ""; closeQ(); };
